@@ -7,3 +7,4 @@ export { Logout } from './Logout';
 export { Facebook } from './Facebook';
 export { Twitter } from './Twitter';
 export { LinkedIn } from './LinkedIn';
+export { CheckCircle } from './CheckCircle';
