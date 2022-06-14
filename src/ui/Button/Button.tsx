@@ -28,6 +28,10 @@ const StyledButton = styled.button<Omit<ButtonProps, 'children'>>`
   box-shadow: 0px 10px 28px rgba(252, 88, 66, 0.2);
   transition: transform ${VARS.animation};
 
+  &:disabled {
+    opacity: 0.6;
+  }
+
   @keyframes rotate {
     from {
       transform: rotate(-360deg);
