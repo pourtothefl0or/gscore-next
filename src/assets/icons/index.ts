@@ -12,3 +12,8 @@ export { Loader } from './Loader';
 export { Success } from './Success';
 export { Error } from './Error';
 export { Basket } from './Basket';
+export { ArrowLeft } from './ArrowLeft';
+export { ArrowRight } from './ArrowRight';
+export { Copy } from './Copy';
+export { Check } from './Check';
+export { NoSubs } from './NoSubs';

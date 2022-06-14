@@ -101,9 +101,4 @@ const NextButton = styled.button`
   margin: 0;
   ${TYPOGRAPHY.paragraph.default}
   color: ${COLORS.accent.primary[1]};
-  transition: color ${VARS.animation};
-
-  &:hover {
-    color: ${COLORS.system.red[400]};
-  }
 `;
