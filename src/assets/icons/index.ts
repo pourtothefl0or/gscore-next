@@ -8,3 +8,7 @@ export { Facebook } from './Facebook';
 export { Twitter } from './Twitter';
 export { LinkedIn } from './LinkedIn';
 export { CheckCircle } from './CheckCircle';
+export { Loader } from './Loader';
+export { Success } from './Success';
+export { Error } from './Error';
+export { Basket } from './Basket';
