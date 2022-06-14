@@ -1,15 +1,15 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
-import { ChevronDown } from '../../../../assets/icons';
+import { ChevronDown } from '../../../../ui/iconComponents';
 import { BREAKPOINTS, COLORS, TYPOGRAPHY } from '../../../../constants';
-import { Popup } from '../../../../ui';
+import { Popup } from '../../../../ui/components';
 
-export const Nav: React.FC = () => {
+const Nav: FC = () => {
   const [isActive, setIsOpen] = useState(false);
 
   return (
-    <StyledNav>
+    <Root>
       <Item>
         <Link href="/subs">
           <NavLink>My subscriptions</NavLink>
@@ -21,11 +21,13 @@ export const Nav: React.FC = () => {
         </NavButton>
         <NavPopup className={isActive ? 'is-open' : ''} />
       </Item>
-    </StyledNav>
+    </Root>
   );
 };
 
-const StyledNav = styled.ul`
+export default Nav;
+
+const Root = styled.ul`
   display: flex;
   align-items: center;
   gap: 16px 32px;

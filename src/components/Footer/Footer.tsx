@@ -1,18 +1,20 @@
 import Link from 'next/link';
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { Container } from '../';
 import { Nav, Social } from './components';
-import { Logo } from '../../assets/icons';
+import { Logo } from '../../ui/iconComponents';
 import { BREAKPOINTS, COLORS, TYPOGRAPHY } from '../../constants';
 
-export const Footer: React.FC = () => {
+const Footer: FC = () => {
   return (
-    <StyledFooter>
+    <Root>
       <Container>
         <FooterTop>
           <Link href="/">
-            <a><Logo /></a>
+            <a>
+              <Logo />
+            </a>
           </Link>
           <Description>
             Ut enim ad minim veniam quis nostrud exercitation  ea commodo
@@ -23,11 +25,13 @@ export const Footer: React.FC = () => {
           <Social />
         </FooterBottom>
       </Container>
-    </StyledFooter>
+    </Root>
   );
 };
 
-const StyledFooter = styled.footer`
+export default Footer;
+
+const Root = styled.footer`
   border-top: 1px solid ${COLORS.neutral[600]};
   background-color: ${COLORS.neutral[800]};
 `;

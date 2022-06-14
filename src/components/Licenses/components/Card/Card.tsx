@@ -1,16 +1,16 @@
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { BREAKPOINTS, COLORS, TYPOGRAPHY, VARS } from '../../../../constants';
-import { ISubs } from '../../../../@types/interfaces';
-import { Button, Status } from '../../../../ui';
+import { ISubs } from '../../../../types/interfaces';
+import { Button, Status } from '../../../../ui/components';
 
-interface CardProps extends ISubs {
+interface Props extends ISubs {
   onClick: (id: number) => void;
 };
 
-export const Card: React.FC<CardProps> = ({ onClick, ...props }) => {
+const Card: FC<Props> = ({ onClick, ...props }) => {
   return (
-    <StyledCard>
+    <Root>
       <Header>
         <Name>Gscore</Name>
         <Status status={props.status} />
@@ -23,11 +23,13 @@ export const Card: React.FC<CardProps> = ({ onClick, ...props }) => {
         </License>
         <Button theme='secondary' onClick={() => onClick(props.id)}>View</Button>
       </Body>
-    </StyledCard>
+    </Root>
   );
 };
 
-const StyledCard = styled.div`
+export default Card;
+
+const Root = styled.div`
   border-radius: ${VARS.radius[1]};
   padding: 16px 0;
   background-color: ${COLORS.neutral[600]};

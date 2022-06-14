@@ -1,13 +1,13 @@
 import Link from 'next/link';
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import { CheckCircle } from '../../../../assets/icons';
+import { CheckCircle } from '../../../../ui/iconComponents';
 import { COLORS, TYPOGRAPHY, VARS } from '../../../../constants';
-import { IOffer } from '../../../../@types/interfaces';
+import { IOffer } from '../../../../types/interfaces';
 
-export const Card: React.FC<IOffer> = ({ ...props }) => {
+const Card: FC<IOffer> = ({ ...props }) => {
   return (
-    <StyledCard>
+    <Root>
       <CardTop className='card-top'>
         <Price>${props.price}</Price>
         <Title>{props.title}</Title>
@@ -15,17 +15,21 @@ export const Card: React.FC<IOffer> = ({ ...props }) => {
       </CardTop>
       <Points>
         {props.points.map(item =>
-          <Point key={item}><CheckCircle /> {item}</Point>
+          <Point key={item}>
+            <CheckCircle /> {item}
+          </Point>
         )}
       </Points>
       <Link href="/login">
         <CardLink className='card-button'>Get Gscore</CardLink>
       </Link>
-    </StyledCard>
+    </Root>
   );
 };
 
-const StyledCard = styled.article`
+export default Card;
+
+const Root = styled.article`
   border-radius: ${VARS.radius[1]};
   padding: 42px 48px;
   height: 100%;

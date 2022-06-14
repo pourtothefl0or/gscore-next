@@ -1,11 +1,11 @@
 import type { NextPage } from 'next';
 import { MainLayout } from '../layouts';
-import { MySubs } from '../pageComponents';
+import { UserSubs } from '../pageComponents/SubsPage';
 
 const Subs: NextPage = () => {
   return (
     <MainLayout>
-      <MySubs />
+      <UserSubs />
     </MainLayout>
   );
 };

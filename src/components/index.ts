@@ -1,6 +1,6 @@
-export { Container } from './Container';
-export { Header } from './Header';
-export { Footer } from './Footer';
-export { Offers } from './Offers';
-export { Table } from './Table';
-export { Licenses } from './Licenses';
+export { default as Container } from './Container';
+export { default as Header } from './Header';
+export { default as Footer } from './Footer';
+export { default as Offers } from './Offers';
+export { default as Table } from './Table';
+export { default as Licenses } from './Licenses';

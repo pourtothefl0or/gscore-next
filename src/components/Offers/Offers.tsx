@@ -1,23 +1,25 @@
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { Card } from './components';
-import { IOffer } from '../../@types/interfaces';
+import { IOffer } from '../../types/interfaces';
 
-interface OffersProps {
+interface Props {
   list: IOffer[];
 };
 
-export const Offers: React.FC<OffersProps> = ({ list }) => {
+const Offers: FC<Props> = ({ list }) => {
   return (
-    <StyledOffers>
+    <Root>
       {list.map(item =>
         <Card key={item.id} {...item} />
       )}
-    </StyledOffers>
+    </Root>
   );
 };
 
-const StyledOffers = styled.div`
+export default Offers;
+
+const Root = styled.div`
   display: flex;
   justify-content: center;
   gap: 28px;

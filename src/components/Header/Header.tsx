@@ -1,17 +1,17 @@
 import Link from 'next/link';
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { Container } from '../';
 import { Nav } from './components'
-import { Burger, Close, Logo } from '../../assets/icons';
+import { Burger, Close, Logo } from '../../ui/iconComponents';
 import { BREAKPOINTS, COLORS } from '../../constants';
 
-export const Header: React.FC = () => {
+const Header: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const toggleIsOpen = () => setIsOpen(!isOpen);
 
   return (
-    <StyledHeader>
+    <Root>
       <HeaderContainer>
         <Link href="/">
           <a>
@@ -35,11 +35,13 @@ export const Header: React.FC = () => {
           <Nav />
         </Menu>
       </HeaderContainer>
-    </StyledHeader>
+    </Root>
   );
 };
 
-const StyledHeader = styled.header`
+export default Header;
+
+const Root = styled.header`
   background-color: ${COLORS.neutral[800]};
 `;
 

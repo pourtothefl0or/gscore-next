@@ -1,1 +1,1 @@
-export { Licenses } from './Licenses';
+export { default } from './Licenses';

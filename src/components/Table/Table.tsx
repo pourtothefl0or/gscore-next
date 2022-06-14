@@ -1,34 +1,35 @@
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import { Basket } from '../../assets/icons';
+import { Basket } from '../../ui/iconComponents';
 import { COLORS, TYPOGRAPHY, VARS } from '../../constants';
-import { ITable } from '../../@types/interfaces';
+import { ITable } from '../../types/interfaces';
 
-interface TableProps {
+interface Props {
   table: ITable[];
 };
 
-export const Table: React.FC<TableProps> = ({ table }) => {
+const Table: FC<Props> = ({ table }) => {
   return (
-    <div>
-      <StyledTable>
-        <TableRow>
-          <TableHeader>Package name</TableHeader>
-          <TableHeader>Price</TableHeader>
+    <Root>
+      <TableRow>
+        <TableHeader>Package name</TableHeader>
+        <TableHeader>Price</TableHeader>
+      </TableRow>
+      {table.map(item =>
+        <TableRow key={item.id}>
+          <TableBody>{item.title}</TableBody>
+          <TableBody className="price">
+            ${item.price}<Basket />
+          </TableBody>
         </TableRow>
-        {table.map(item =>
-          <TableRow key={item.id}>
-            <TableBody>{item.title}</TableBody>
-            <TableBody className="price">${item.price}<Basket /></TableBody>
-          </TableRow>
-        )}
-      </StyledTable>
-    </div>
-
+      )}
+    </Root>
   );
 };
 
-const StyledTable = styled.div`
+export default Table;
+
+const Root = styled.div`
   margin: 0 0 24px;
   border-radius: ${VARS.radius[1]};
   padding: 12px 0;

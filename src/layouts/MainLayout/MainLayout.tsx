@@ -1,13 +1,13 @@
-import React from 'react';
+import { FC, ReactNode } from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
 import { Header, Footer } from '../../components';
 
-interface MainLayoutProps {
-  children: React.ReactNode;
+interface Props {
+  children: ReactNode;
 };
 
-export const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+export const MainLayout: FC<Props> = ({ children }) => {
   return (
     <>
       <Head>

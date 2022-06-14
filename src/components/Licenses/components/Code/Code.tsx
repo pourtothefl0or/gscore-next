@@ -1,13 +1,13 @@
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import { Copy } from '../../../../assets/icons';
+import { Copy } from '../../../../ui/iconComponents';
 import { BREAKPOINTS, COLORS, TYPOGRAPHY, VARS } from '../../../../constants';
-import { IStatus, ISubsLicense } from '../../../../@types/interfaces';
-import { Button, Checkbox, Status } from '../../../../ui';
+import { IStatus, ISubsLicense } from '../../../../types/interfaces';
+import { Button, Checkbox, Status } from '../../../../ui/components';
 
-export const Code: React.FC<ISubsLicense> = ({ ...props }) => {
+const Code: FC<ISubsLicense> = ({ ...props }) => {
   return (
-    <StyledCode status={props.status}>
+    <Root status={props.status}>
       <Column className='checkbox'>
         <Title></Title>
         <Checkbox />
@@ -35,11 +35,13 @@ export const Code: React.FC<ISubsLicense> = ({ ...props }) => {
         <Title>Status</Title>
         <Status status={props.status} />
       </Column>
-    </StyledCode>
+    </Root>
   );
 };
 
-const StyledCode = styled.div<{ status: IStatus }>`
+export default Code;
+
+const Root = styled.div<{ status: IStatus }>`
   display: grid;
   grid-template-columns:
     ${props => props.status !== 'Inactive'

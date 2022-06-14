@@ -1,6 +1,6 @@
 import type { NextPage } from 'next';
 import { MainLayout } from '../layouts';
-import { ProfileEdit } from '../pageComponents';
+import { ProfileEdit } from '../pageComponents/SettingsPage';
 
 const Settings: NextPage = () => {
   return (

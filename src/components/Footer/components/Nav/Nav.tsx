@@ -1,10 +1,10 @@
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
 import { COLORS, TYPOGRAPHY } from '../../../../constants';
 
-export const Nav: React.FC = () => {
+const Nav: FC = () => {
   return (
-    <StyledNav>
+    <Root>
       <Item>
         <NavText>Copyright &copy; 2022 GScore</NavText>
       </Item>
@@ -17,11 +17,13 @@ export const Nav: React.FC = () => {
       <Item>
         <NavLink href="#">Privacy Policy</NavLink>
       </Item>
-    </StyledNav>
+    </Root>
   );
 };
 
-const StyledNav = styled.ul`
+export default Nav;
+
+const Root = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;

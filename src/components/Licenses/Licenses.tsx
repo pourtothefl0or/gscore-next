@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import { FC, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
-import { ISubs, ISubsLicense } from '../../@types/interfaces';
+import { ISubs, ISubsLicense } from '../../types/interfaces';
 import { Card, Code } from './components';
 import styled from 'styled-components';
 import { BREAKPOINTS, COLORS, TYPOGRAPHY, VARS } from '../../constants';
-import { ArrowLeft, ArrowRight } from '../../assets/icons';
+import { ArrowLeft, ArrowRight } from '../../ui/iconComponents';
 
-interface LicensesProps {
+interface Props {
   subs: ISubs[];
   subsLicense: ISubsLicense[];
 };
 
-export const Licenses: React.FC<LicensesProps> = ({ subs, subsLicense }) => {
+const Licenses: FC<Props> = ({ subs, subsLicense }) => {
   const [licenseId, setLicenseId] = useState<number>(subs[0].id);
 
   return (
@@ -61,6 +61,8 @@ export const Licenses: React.FC<LicensesProps> = ({ subs, subsLicense }) => {
     </>
   );
 };
+
+export default Licenses;
 
 const LicensesSlider = styled.div`
   margin-bottom: 32px;

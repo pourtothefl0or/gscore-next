@@ -1,41 +1,31 @@
-import React from 'react';
+import { FC } from 'react';
 import styled from 'styled-components';
-import { Facebook, LinkedIn, Twitter } from '../../../../assets/icons';
+import { Facebook, LinkedIn, Twitter } from '../../../../ui/iconComponents';
 import { COLORS } from '../../../../constants';
 
-export const Social: React.FC = () => {
+const Social: FC = () => {
   const socialArray = [
-    {
-      id: 1,
-      href: '#',
-      image: <Twitter />,
-    },
-    {
-      id: 2,
-      href: '#',
-      image: <Facebook />,
-    },
-    {
-      id: 3,
-      href: '#',
-      image: <LinkedIn />,
-    },
+    { href: '#', image: <Twitter />, },
+    { href: '#', image: <Facebook />, },
+    { href: '#', image: <LinkedIn />, },
   ];
 
   return (
-    <StyledSocial>
-      {socialArray.map(el =>
-        <li key={el.id}>
+    <Root>
+      {socialArray.map((el, index) =>
+        <li key={index}>
           <SocialLink href={el.href}>
             {el.image}
           </SocialLink>
         </li>
       )}
-    </StyledSocial>
+    </Root>
   );
 };
 
-const StyledSocial = styled.ul`
+export default Social;
+
+const Root = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;

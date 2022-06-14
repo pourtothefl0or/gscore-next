@@ -3,9 +3,7 @@ import '../styles/normalize.css';
 import '../styles/globals.css';
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  return (
-    <Component {...pageProps} />
-  );
+  return <Component {...pageProps} />;
 };
 
 export default MyApp;

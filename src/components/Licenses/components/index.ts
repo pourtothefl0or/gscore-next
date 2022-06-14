@@ -1,2 +1,2 @@
-export { Card } from './Card';
-export { Code } from './Code';
+export { default as Card } from './Card';
+export { default as Code } from './Code';
