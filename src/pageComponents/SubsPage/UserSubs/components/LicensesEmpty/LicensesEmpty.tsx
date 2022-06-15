@@ -2,7 +2,8 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import { NoSubs } from '../../../../../ui/iconComponents';
 import { COLORS, TYPOGRAPHY } from '../../../../../constants';
-import { Button } from '../../../../../ui/components';
+import { ButtonLink } from '../../../../../ui/components';
+import Link from 'next/link';
 
 const LicensesEmpty: FC = () => {
   return (
@@ -14,7 +15,9 @@ const LicensesEmpty: FC = () => {
       <Description>
         You can subscribe right now by clicking on the button below
       </Description>
-      <Button>Get GScore</Button>
+      <Link href="/">
+        <ButtonLink>Get GScore</ButtonLink>
+      </Link>
     </Root>
   );
 };

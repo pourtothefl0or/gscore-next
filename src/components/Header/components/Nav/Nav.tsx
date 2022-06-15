@@ -2,11 +2,15 @@ import Link from 'next/link';
 import { FC, useState } from 'react';
 import styled from 'styled-components';
 import { ChevronDown } from '../../../../ui/iconComponents';
-import { BREAKPOINTS, COLORS, TYPOGRAPHY } from '../../../../constants';
+import { BREAKPOINTS, COLORS, TYPOGRAPHY, VARS } from '../../../../constants';
 import { Popup } from '../../../../ui/components';
 
+interface INavButton {
+  $isOpen: boolean;
+};
+
 const Nav: FC = () => {
-  const [isActive, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Root>
@@ -16,10 +20,13 @@ const Nav: FC = () => {
         </Link>
       </Item>
       <Item>
-        <NavButton className={isActive ? 'is-active' : ''} onClick={() => setIsOpen(!isActive)}>
-          Alex <ChevronDown />
+        <NavButton
+          $isOpen={isOpen}
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          Alex <ChevronDown/>
         </NavButton>
-        <NavPopup className={isActive ? 'is-open' : ''} />
+        {isOpen && <NavPopup />}
       </Item>
     </Root>
   );
@@ -53,13 +60,22 @@ const NavLink = styled.a`
   margin: 0;
   ${TYPOGRAPHY.textSingle[300].regular}
   color: ${COLORS.neutral[100]};
+  transition: color ${VARS.animation};
+
+  &:focus {
+    color: ${COLORS.accent.primary[1]};
+  }
+
+  &:hover {
+    color: ${COLORS.system.red[400]};
+  }
 
   @media (max-width: ${BREAKPOINTS.tablet.max}) {
     padding: 20px 0;
   }
 `;
 
-const NavButton = styled.button`
+const NavButton = styled.button<INavButton>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -67,12 +83,25 @@ const NavButton = styled.button`
   margin: 0;
   width: 100%;
   ${TYPOGRAPHY.textSingle[300].regular}
+  transition: color ${VARS.animation};
   color: ${COLORS.neutral[100]};
 
-  &.is-active {
+  svg {
+    transition: transform ${VARS.animation};
+  }
+
+  ${({ $isOpen }) => $isOpen && `
     svg {
       transform: rotate(180deg);
     }
+  `}
+
+  &:focus {
+    color: ${COLORS.accent.primary[1]};
+  }
+
+  &:hover {
+    color: ${COLORS.system.red[400]};
   }
 
   @media (max-width: ${BREAKPOINTS.tablet.max}) {

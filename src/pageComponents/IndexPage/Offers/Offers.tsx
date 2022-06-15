@@ -1,50 +1,50 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { IOffer } from '../../../types/interfaces';
+import { IOffer } from '../../../types/index';
 import { Container, Offers as OffersList } from '../../../components';
-import { COLORS, TYPOGRAPHY } from '../../../constants';
+import { COLORS, TYPOGRAPHY, VARS } from '../../../constants';
 import { Title } from '../../../ui/components';
 
-export const Offers: FC = () => {
-  const offersArray: IOffer[] = [
-    {
-      id: 1,
-      title: 'Single site license',
-      description: 'Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price',
-      price: 77,
-      points: [
-        'Single site license',
-        'Special introductory pricing',
-        'Unlimited Pages and Keywords',
-        'Billed annually',
-      ],
-    },
-    {
-      id: 2,
-      title: '3 Site license',
-      description: 'Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price',
-      price: 117,
-      points: [
-        'All features for 3 sites',
-        'Special introductory pricing',
-        'Unlimited Pages and Keywords',
-        'Billed annually',
-      ],
-    },
-    {
-      id: 3,
-      title: '10 Site license',
-      description: 'Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price',
-      price: 167,
-      points: [
-        'All features for 10 sites',
-        'Special introductory pricing',
-        'Unlimited Pages and Keywords',
-        'Billed annually',
-      ],
-    },
-  ];
+const offersArray: IOffer[] = [
+  {
+    id: 1,
+    title: 'Single site license',
+    description: 'Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price',
+    price: 77,
+    points: [
+      'Single site license',
+      'Special introductory pricing',
+      'Unlimited Pages and Keywords',
+      'Billed annually',
+    ],
+  },
+  {
+    id: 2,
+    title: '3 Site license',
+    description: 'Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price',
+    price: 117,
+    points: [
+      'All features for 3 sites',
+      'Special introductory pricing',
+      'Unlimited Pages and Keywords',
+      'Billed annually',
+    ],
+  },
+  {
+    id: 3,
+    title: '10 Site license',
+    description: 'Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price',
+    price: 167,
+    points: [
+      'All features for 10 sites',
+      'Special introductory pricing',
+      'Unlimited Pages and Keywords',
+      'Billed annually',
+    ],
+  },
+];
 
+export const Offers: FC = () => {
   return (
     <Root>
       <OffersContainer>
@@ -91,4 +91,9 @@ const ContactLink = styled.a`
   ${TYPOGRAPHY.paragraph.default}
   text-decoration: underline;
   color: ${COLORS.accent.primary[1]};
+  transition: color ${VARS.animation};
+
+  &:hover {
+    color: ${COLORS.system.red[400]};
+  }
 `;

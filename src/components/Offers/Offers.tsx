@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { Card } from './components';
-import { IOffer } from '../../types/interfaces';
+import { IOffer } from '../../types/index';
 
 interface Props {
   list: IOffer[];
@@ -10,8 +10,8 @@ interface Props {
 const Offers: FC<Props> = ({ list }) => {
   return (
     <Root>
-      {list.map(item =>
-        <Card key={item.id} {...item} />
+      {list.map(obj =>
+        <Card key={obj.id} {...obj} />
       )}
     </Root>
   );
@@ -27,11 +27,5 @@ const Root = styled.div`
 
   > * {
     max-width: 404px;
-
-    @media (min-width: 1298px) {
-      &:not(:nth-child(2)) {
-        margin-top: 50px;
-      }
-    }
   }
 `;

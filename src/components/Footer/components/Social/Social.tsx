@@ -1,21 +1,21 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { Facebook, LinkedIn, Twitter } from '../../../../ui/iconComponents';
-import { COLORS } from '../../../../constants';
+import { COLORS, VARS } from '../../../../constants';
+
+const socialArray = [
+  { href: '#', image: <Twitter />, },
+  { href: '#', image: <Facebook />, },
+  { href: '#', image: <LinkedIn />, },
+];
 
 const Social: FC = () => {
-  const socialArray = [
-    { href: '#', image: <Twitter />, },
-    { href: '#', image: <Facebook />, },
-    { href: '#', image: <LinkedIn />, },
-  ];
-
   return (
     <Root>
-      {socialArray.map((el, index) =>
+      {socialArray.map((obj, index) =>
         <li key={index}>
-          <SocialLink href={el.href}>
-            {el.image}
+          <SocialLink href={obj.href}>
+            {obj.image}
           </SocialLink>
         </li>
       )}
@@ -35,4 +35,13 @@ const Root = styled.ul`
 
 const SocialLink = styled.a`
   color: ${COLORS.neutral[100]};
+  transition: color ${VARS.animation};
+
+  &:focus {
+    color: ${COLORS.accent.primary[1]};
+  }
+
+  &:hover {
+    color: ${COLORS.system.red[400]};
+  }
 `;

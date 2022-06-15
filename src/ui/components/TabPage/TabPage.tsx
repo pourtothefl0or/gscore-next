@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { COLORS, TYPOGRAPHY } from '../../../constants';
-import { IStep } from '../../../types/interfaces';
+import { IStep } from '../../../types/index';
 
 interface Props {
   steps: IStep[];
@@ -9,12 +9,20 @@ interface Props {
   onClick: (id: number) => void;
 };
 
+interface ITabItem {
+  $step: number;
+};
+
 const TabPage: FC<Props> = ({ steps, step, onClick }) => {
   return (
-    <Tab step={step}>
-      {steps.map(el =>
-        <TabItem key={el.id} onClick={() => onClick(el.id)}>
-          <TabText>{el.title}</TabText>
+    <Tab>
+      {steps.map(obj =>
+        <TabItem
+          key={obj.id}
+          onClick={() => onClick(obj.id)}
+          $step={step}
+        >
+          <TabText>{obj.title}</TabText>
         </TabItem>
       )}
     </Tab>
@@ -23,12 +31,16 @@ const TabPage: FC<Props> = ({ steps, step, onClick }) => {
 
 export default TabPage;
 
-const Tab = styled.ul<Omit<Props, 'steps' | 'onClick'>>`
+const Tab = styled.ul`
   display: flex;
   border-bottom: 1px solid ${COLORS.neutral[600]};
   margin-bottom: 48px;
+`;
 
-  li:nth-of-type(${props => props.step}) {
+const TabItem = styled.li<ITabItem>`
+  cursor: pointer;
+
+  &:nth-of-type(${({ $step }) => $step}) {
     p {
       color: ${COLORS.accent.primary[1]};
 
@@ -37,10 +49,6 @@ const Tab = styled.ul<Omit<Props, 'steps' | 'onClick'>>`
       }
     }
   }
-`;
-
-const TabItem = styled.li`
-  cursor: pointer;
 `;
 
 const TabText = styled.p`

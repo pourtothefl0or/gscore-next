@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { COLORS, TYPOGRAPHY } from '../../../../../constants';
 import { Table } from '../../../../../components';
 import { Button, Title } from '../../../../../ui/components';
-import { ITable } from '../../../../../types/interfaces';
+import { ITable } from '../../../../../types/index';
 
 interface Props {
   table: ITable[];

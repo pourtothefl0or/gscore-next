@@ -6,18 +6,22 @@ interface Props {
   className?: string;
   size?: 'xxl' | 'xl';
   children: ReactNode;
-}
+};
+
+interface IRoot {
+  $size: 'xxl' | 'xl';
+};
 
 const Title: FC<Props> = ({ className, size = 'xxl', children }) => {
-  return <Root className={className} size={size}>{children}</Root>;
+  return <Root className={className} $size={size}>{children}</Root>;
 };
 
 export default Title;
 
-const Root = styled.h1<Omit<Props, 'className' | 'children'>>`
+const Root = styled.h1<IRoot>`
   color: ${COLORS.neutral[100]};
 
-  ${props => props.size === 'xxl' &&`
+  ${({ $size }) => $size === 'xxl' &&`
     ${TYPOGRAPHY.specialHeadings[2]}
 
     @media (max-width: ${BREAKPOINTS.tablet.max}) {
@@ -25,7 +29,7 @@ const Root = styled.h1<Omit<Props, 'className' | 'children'>>`
     }
   `}
 
-  ${props => props.size === 'xl' &&`
+  ${({ $size }) => $size === 'xl' &&`
     ${TYPOGRAPHY.specialHeadings[3]}
 
     @media (max-width: ${BREAKPOINTS.tablet.max}) {

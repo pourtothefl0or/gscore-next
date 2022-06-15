@@ -17,6 +17,8 @@ export interface ITable {
   price: number;
 };
 
+export type IStatus = 'Active' | 'Inactive' | 'Hold';
+
 export interface ISubs {
   id: number;
   title: string;
@@ -33,4 +35,3 @@ export interface ISubsLicense {
   status: IStatus;
 };
 
-export type IStatus = 'Active' | 'Inactive' | 'Hold';

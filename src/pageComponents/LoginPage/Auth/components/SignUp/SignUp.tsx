@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from 'styled-components';
-import { COLORS, TYPOGRAPHY } from '../../../../../constants';
+import { COLORS, TYPOGRAPHY, VARS } from '../../../../../constants';
 import { Button, Input, Title } from '../../../../../ui/components';
 
 interface Props {
@@ -103,4 +103,9 @@ const NextButton = styled.button`
   margin: 0;
   ${TYPOGRAPHY.paragraph.default}
   color: ${COLORS.accent.primary[1]};
+  transition: color ${VARS.animation};
+
+  &:hover {
+    color: ${COLORS.system.red[400]}
+  }
 `;

@@ -4,7 +4,11 @@ import styled from 'styled-components';
 import { Container } from '../';
 import { Nav } from './components'
 import { Burger, Close, Logo } from '../../ui/iconComponents';
-import { BREAKPOINTS, COLORS } from '../../constants';
+import { BREAKPOINTS, COLORS, VARS } from '../../constants';
+
+interface IMenu {
+  $isOpen: boolean;
+};
 
 const Header: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +25,7 @@ const Header: FC = () => {
         <BurgerButton onClick={toggleIsOpen}>
           <Burger />
         </BurgerButton>
-        <Menu className={isOpen ? 'is-open' : ''}>
+        <Menu $isOpen={isOpen}>
           <MenuTop>
             <Button onClick={toggleIsOpen}>
               <Close />
@@ -58,7 +62,7 @@ const HeaderContainer = styled(Container)`
   }
 `;
 
-const Menu = styled.div`
+const Menu = styled.div<IMenu>`
   @media (max-width: ${BREAKPOINTS.tablet.max}) {
     position: fixed;
     top: 0;
@@ -71,12 +75,14 @@ const Menu = styled.div`
     opacity: 0;
     visibility: hidden;
     transform: translateX(100%);
+    transition: all ${VARS.animation};
+    transition-property: opacity, visibility, transform;
 
-    &.is-open {
+    ${({ $isOpen }) => $isOpen &&`
       opacity: 1;
       visibility: visible;
       transform: translateX(0);
-    }
+    `}
   }
 `;
 

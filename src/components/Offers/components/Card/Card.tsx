@@ -3,25 +3,25 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import { CheckCircle } from '../../../../ui/iconComponents';
 import { COLORS, TYPOGRAPHY, VARS } from '../../../../constants';
-import { IOffer } from '../../../../types/interfaces';
+import { IOffer } from '../../../../types/index';
 
-const Card: FC<IOffer> = ({ ...props }) => {
+const Card: FC<IOffer> = ({ price, title, description, points }) => {
   return (
     <Root>
-      <CardTop className='card-top'>
-        <Price>${props.price}</Price>
-        <Title>{props.title}</Title>
-        <Description className='card-top__description'>{props.description}</Description>
+      <CardTop>
+        <Price>${price}</Price>
+        <Title>{title}</Title>
+        <Description>{description}</Description>
       </CardTop>
       <Points>
-        {props.points.map(item =>
-          <Point key={item}>
-            <CheckCircle /> {item}
+        {points.map(el =>
+          <Point key={el}>
+            <CheckCircle /> {el}
           </Point>
         )}
       </Points>
       <Link href="/login">
-        <CardLink className='card-button'>Get Gscore</CardLink>
+        <CardLink>Get Gscore</CardLink>
       </Link>
     </Root>
   );
@@ -34,23 +34,6 @@ const Root = styled.article`
   padding: 42px 48px;
   height: 100%;
   background-color: ${COLORS.neutral[700]};
-
-  /* favorite card */
-  &:nth-child(2) {
-    background-color: ${COLORS.accent.primary[1]};
-
-    .card-top {
-      border-bottom-color: ${COLORS.neutral[100]};
-
-      &__description {
-        color: ${COLORS.neutral[100]};
-      }
-    }
-
-    .card-button {
-      color: ${COLORS.accent.primary[1]};
-    }
-  }
 `;
 
 const CardTop = styled.div`

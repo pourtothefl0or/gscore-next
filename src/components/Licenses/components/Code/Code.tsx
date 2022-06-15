@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import { Copy } from '../../../../ui/iconComponents';
 import { BREAKPOINTS, COLORS, TYPOGRAPHY, VARS } from '../../../../constants';
-import { IStatus, ISubsLicense } from '../../../../types/interfaces';
+import { IStatus, ISubsLicense } from '../../../../types/index';
 import { Button, Checkbox, Status } from '../../../../ui/components';
 
 const Code: FC<ISubsLicense> = ({ ...props }) => {
@@ -16,7 +16,9 @@ const Code: FC<ISubsLicense> = ({ ...props }) => {
         <Title>License code</Title>
         <Wrapper className='button'>
           <Text>{props.code}</Text>
-          <CodeCopy><Copy /></CodeCopy>
+          <CodeCopy>
+            <Copy />
+          </CodeCopy>
         </Wrapper>
       </Column>
       <Column className='domain'>
@@ -44,7 +46,7 @@ export default Code;
 const Root = styled.div<{ status: IStatus }>`
   display: grid;
   grid-template-columns:
-    ${props => props.status !== 'Inactive'
+    ${({ status }) => status !== 'Inactive'
       ? '28px 300px minmax(300px, 1fr) 80px;'
       : '28px 300px minmax(300px, 650px) 1fr 80px;'
     };

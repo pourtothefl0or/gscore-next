@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 import 'swiper/css';
-import { ISubs, ISubsLicense } from '../../types/interfaces';
+import { ISubs, ISubsLicense } from '../../types/index';
 import { Card, Code } from './components';
 import styled from 'styled-components';
 import { BREAKPOINTS, COLORS, TYPOGRAPHY, VARS } from '../../constants';
@@ -13,7 +13,7 @@ interface Props {
   subsLicense: ISubsLicense[];
 };
 
-const Licenses: FC<Props> = ({ subs, subsLicense }) => {
+const Licenses: FC<Props> = ({ subs = [], subsLicense }) => {
   const [licenseId, setLicenseId] = useState<number>(subs[0].id);
 
   return (
@@ -34,27 +34,31 @@ const Licenses: FC<Props> = ({ subs, subsLicense }) => {
             renderBullet: index => `<span>${[index]}</span>`
           }}
         >
-          {subs.map(el =>
-            <SwiperSlide key={el.id}>
-              <Card {...el} onClick={(id: number) => setLicenseId(id)}/>
+          {subs.map(obj =>
+            <SwiperSlide key={obj.id}>
+              <Card {...obj} onClick={(id: number) => setLicenseId(id)}/>
             </SwiperSlide>
           )}
         </Slider>
         {subs.length > 0 &&
           <Counter>
-            <CounterButton className='prev'><ArrowLeft /></CounterButton>
+            <CounterButton className='prev'>
+              <ArrowLeft />
+            </CounterButton>
             <CounterList className='counter-pagination' />
-            <CounterButton className='next'><ArrowRight /></CounterButton>
+            <CounterButton className='next'>
+              <ArrowRight />
+            </CounterButton>
           </Counter>
         }
       </LicensesSlider>
 
       <LicensesCodeList>
         {subsLicense
-          .filter(el => el.subsId === licenseId)
-          .map(el =>
-            <li key={el.id}>
-              <Code {...el} />
+          .filter(obj => obj.subsId === licenseId)
+          .map(obj =>
+            <li key={obj.id}>
+              <Code {...obj} />
             </li>
         )}
       </LicensesCodeList>
@@ -74,6 +78,7 @@ const Slider = styled(Swiper)`
   max-width: 620px;
 
   .swiper-slide {
+    transition: opacity ${VARS.animation};
     opacity: 0.6;
 
     &-active {
@@ -107,6 +112,7 @@ const CounterButton = styled.button`
   width: var(--size);
   height: var(--size);
   color: ${COLORS.neutral[100]};
+  transition: color ${VARS.animation};
 
   &.swiper-button-disabled {
     color: ${COLORS.neutral[600]};

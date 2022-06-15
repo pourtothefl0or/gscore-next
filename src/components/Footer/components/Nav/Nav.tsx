@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import styled from 'styled-components';
-import { COLORS, TYPOGRAPHY } from '../../../../constants';
+import { COLORS, TYPOGRAPHY, VARS } from '../../../../constants';
 
 const Nav: FC = () => {
   return (
@@ -60,6 +60,15 @@ const NavLink = styled.a`
   display: inline-flex;
   margin: 0;
   ${TYPOGRAPHY.paragraph.default};
-  color: ${COLORS.neutral[100]};
   text-decoration: underline;
+  color: ${COLORS.neutral[100]};
+  transition: color ${VARS.animation};
+
+  &:focus {
+    color: ${COLORS.accent.primary[1]};
+  }
+
+  &:hover {
+    color: ${COLORS.system.red[400]};
+  }
 `;

@@ -1,32 +1,25 @@
-import { ButtonHTMLAttributes, FC, ReactNode } from 'react';
+import { AnchorHTMLAttributes, FC, ReactNode } from 'react';
 import styled from 'styled-components';
 import { COLORS, VARS, TYPOGRAPHY } from '../../../constants';
-import { Loader } from "../../iconComponents";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface Props extends AnchorHTMLAttributes<HTMLAnchorElement> {
   className?: string;
   theme?: 'primary' | 'secondary';
-  isLoader?: boolean;
   children?: ReactNode;
 };
 
-export enum ButtonTheme {
+export enum ButtonLinkTheme {
   primary = 'primary',
   secondary = 'secondary',
 };
 
-const Button: FC<Props> = ({ theme = ButtonTheme.primary , children, ...props}) => {
-  return (
-    <Root theme={theme} {...props}>
-      {!props.isLoader && children}
-      {props.isLoader && <Loader />}
-    </Root>
-  );
+const ButtonLink: FC<Props> = ({ theme = ButtonLinkTheme.primary , children, ...props}) => {
+  return <Root theme={theme} {...props}>{children}</Root>;
 };
 
-export default Button;
+export default ButtonLink;
 
-const Root = styled.button<Omit<Props, 'children'>>`
+const Root = styled.a<Omit<Props, 'children'>>`
   outline: transparent;
   border-radius: 4px;
   padding: 20px 24px;
@@ -35,19 +28,13 @@ const Root = styled.button<Omit<Props, 'children'>>`
   text-align: center;
   box-shadow: 0px 10px 28px rgba(252, 88, 66, 0.2);
   transition: all ${VARS.animation};
-  transition-property: outline, color, background-color, opacity, transform;
+  transition-property: outline, color, background-color, opacity;
 
   &:disabled {
     opacity: 0.6;
   }
 
-  @keyframes rotate {
-    from {
-      transform: rotate(-360deg);
-    }
-  }
-
-  ${({ theme }) => theme === ButtonTheme.primary &&`
+  ${({ theme }) => theme === ButtonLinkTheme.primary &&`
     color: ${COLORS.neutral[100]};
     background-color: ${COLORS.accent.primary[1]};
 
@@ -60,7 +47,7 @@ const Root = styled.button<Omit<Props, 'children'>>`
     }
   `}
 
-  ${({ theme }) => theme === ButtonTheme.secondary &&`
+  ${({ theme }) => theme === ButtonLinkTheme.secondary &&`
     color: ${COLORS.accent.primary[1]};
     background-color: ${COLORS.neutral[100]};
 
@@ -72,14 +59,4 @@ const Root = styled.button<Omit<Props, 'children'>>`
       outline: 3px solid ${COLORS.neutral[100]}4d;
     }
   `}
-
-  ${({ isLoader }) => isLoader &&`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    svg {
-      animation: rotate 1s linear infinite;
-    }
-  `};
 `;

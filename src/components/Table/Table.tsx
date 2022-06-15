@@ -2,7 +2,7 @@ import { FC } from 'react';
 import styled from 'styled-components';
 import { Basket } from '../../ui/iconComponents';
 import { COLORS, TYPOGRAPHY, VARS } from '../../constants';
-import { ITable } from '../../types/interfaces';
+import { ITable } from '../../types/index';
 
 interface Props {
   table: ITable[];
@@ -15,11 +15,11 @@ const Table: FC<Props> = ({ table }) => {
         <TableHeader>Package name</TableHeader>
         <TableHeader>Price</TableHeader>
       </TableRow>
-      {table.map(item =>
-        <TableRow key={item.id}>
-          <TableBody>{item.title}</TableBody>
+      {table.map(obj =>
+        <TableRow key={obj.id}>
+          <TableBody>{obj.title}</TableBody>
           <TableBody className="price">
-            ${item.price}<Basket />
+            ${obj.price}<Basket />
           </TableBody>
         </TableRow>
       )}

@@ -1,27 +1,28 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { BREAKPOINTS, COLORS, TYPOGRAPHY, VARS } from '../../../../constants';
-import { ISubs } from '../../../../types/interfaces';
+import { ISubs } from '../../../../types/index';
 import { Button, Status } from '../../../../ui/components';
+import { ButtonTheme } from '../../../../ui/components/Button/Button';
 
 interface Props extends ISubs {
   onClick: (id: number) => void;
 };
 
-const Card: FC<Props> = ({ onClick, ...props }) => {
+const Card: FC<Props> = ({ id, status, title, price, validDate, onClick }) => {
   return (
     <Root>
       <Header>
         <Name>Gscore</Name>
-        <Status status={props.status} />
+        <Status status={status} />
       </Header>
       <Body>
         <License>
-          <Title>{props.title}</Title>
-          <Price>${props.price}</Price>
-          <Date>valid until {props.validDate}</Date>
+          <Title>{title}</Title>
+          <Price>${price}</Price>
+          <Date>valid until {validDate}</Date>
         </License>
-        <Button theme='secondary' onClick={() => onClick(props.id)}>View</Button>
+        <Button theme={ButtonTheme.secondary} onClick={() => onClick(id)}>View</Button>
       </Body>
     </Root>
   );

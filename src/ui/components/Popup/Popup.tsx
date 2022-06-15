@@ -24,11 +24,11 @@ const Popup: FC<Props> = ({ className }) => {
 
   return (
     <Root className={className}>
-      {popupArray.map((el, index) =>
+      {popupArray.map((obj, index) =>
         <li key={index}>
-          <Link href={el.href}>
+          <Link href={obj.href}>
             <PopupLink>
-              {el.image} {el.text}
+              {obj.image} {obj.text}
             </PopupLink>
           </Link>
         </li>
@@ -42,13 +42,8 @@ export default Popup;
 const Root = styled.ul`
   border-radius: ${VARS.radius[1]};
   background-color: ${COLORS.neutral[700]};
-  opacity: 0;
-  visibility: hidden;
-
-  &.is-open {
-    opacity: 1;
-    visibility: visible;
-  }
+  transition: all ${VARS.animation};
+  transition-property: opacity, visibility;
 `;
 
 const PopupLink = styled.a`
@@ -59,6 +54,15 @@ const PopupLink = styled.a`
   padding: 24px 52px 24px 24px;
   ${TYPOGRAPHY.textSingle[300].regular}
   color: ${COLORS.neutral[100]};
+  transition: color ${VARS.animation};
+
+  &:focus {
+    color: ${COLORS.accent.primary[1]};
+  }
+
+  &:hover {
+    color: ${COLORS.system.red[400]};
+  }
 
   @media (max-width: ${BREAKPOINTS.tablet.max}) {
     padding: 15px 0;
