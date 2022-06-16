@@ -7,7 +7,7 @@ interface Props {
   list: IOffer[];
 };
 
-const Offers: FC<Props> = ({ list }) => {
+const OffersList: FC<Props> = ({ list }) => {
   return (
     <Root>
       {list.map(obj =>
@@ -17,7 +17,7 @@ const Offers: FC<Props> = ({ list }) => {
   );
 };
 
-export default Offers;
+export default OffersList;
 
 const Root = styled.div`
   display: flex;

@@ -1,45 +1,48 @@
 import { FC } from 'react';
 import styled from 'styled-components';
 import { IOffer } from '../../../types/index';
-import { Container, Offers as OffersList } from '../../../components';
+import { Container, OffersList } from '../../../components';
 import { COLORS, TYPOGRAPHY, VARS } from '../../../constants';
 import { Title } from '../../../ui/components';
 
 const offersArray: IOffer[] = [
   {
     id: 1,
-    title: 'Single site license',
-    description: 'Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price',
-    price: 77,
-    points: [
-      'Single site license',
-      'Special introductory pricing',
-      'Unlimited Pages and Keywords',
-      'Billed annually',
+    sitesCount: 1,
+    name: 'One cite',
+    prices: [
+      {
+        id: 1,
+        isActive: true,
+        productId: 1,
+        price: '52'
+      },
     ],
   },
   {
     id: 2,
-    title: '3 Site license',
-    description: 'Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price',
-    price: 117,
-    points: [
-      'All features for 3 sites',
-      'Special introductory pricing',
-      'Unlimited Pages and Keywords',
-      'Billed annually',
+    sitesCount: 3,
+    name: 'Three cites',
+    prices: [
+      {
+        id: 2,
+        isActive: true,
+        productId: 2,
+        price: '17'
+      },
     ],
   },
   {
     id: 3,
-    title: '10 Site license',
-    description: 'Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price',
-    price: 167,
-    points: [
-      'All features for 10 sites',
-      'Special introductory pricing',
-      'Unlimited Pages and Keywords',
-      'Billed annually',
+    sitesCount: 7,
+    name: 'Seven sites',
+    prices: [
+      {
+        id: 3,
+        isActive: true,
+        productId: 3,
+        price: '58'
+      },
     ],
   },
 ];

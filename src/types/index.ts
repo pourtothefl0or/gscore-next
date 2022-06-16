@@ -1,9 +1,15 @@
-export interface IOffer {
+export interface IOffer   {
   id: number;
-  title: string;
-  description: string;
-  price: number;
-  points: string[];
+  sitesCount: number;
+  name: string;
+  prices: [
+    {
+      id: number;
+      isActive: boolean;
+      productId: number;
+      price: string;
+    },
+  ];
 };
 
 export interface IStep {

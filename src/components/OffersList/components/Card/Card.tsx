@@ -5,17 +5,21 @@ import { CheckCircle } from '../../../../ui/iconComponents';
 import { COLORS, TYPOGRAPHY, VARS } from '../../../../constants';
 import { IOffer } from '../../../../types/index';
 
-const Card: FC<IOffer> = ({ price, title, description, points }) => {
+const Card: FC<IOffer> = ({ name, prices, sitesCount = 0}) => {
+  const points = [`${sitesCount} site license`, 'Special introductory pricing', 'Unlimited Pages and Keywords', 'Billed annually'];
+
   return (
     <Root>
       <CardTop>
-        <Price>${price}</Price>
-        <Title>{title}</Title>
-        <Description>{description}</Description>
+        <Price>${prices[0].price}</Price>
+        <Title>{name} license</Title>
+        <Description>
+          Get the advanced WordPress plugin that optimizes content with GSC keywords at one low annual price
+        </Description>
       </CardTop>
       <Points>
-        {points.map(el =>
-          <Point key={el}>
+        {points.map((el, index) =>
+          <Point key={index}>
             <CheckCircle /> {el}
           </Point>
         )}
