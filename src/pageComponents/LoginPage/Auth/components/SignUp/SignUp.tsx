@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from 'styled-components';
-import { COLORS, TYPOGRAPHY, VARS } from '../../../../../constants';
+import { COLORS, REGEX, TYPOGRAPHY, VARS } from '../../../../../constants';
 import { Button, Input, Title } from '../../../../../ui/components';
 
 interface Props {
@@ -15,7 +15,15 @@ interface IFormFields {
 };
 
 const SignUp: FC<Props> = ({ nextStep }) => {
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm<IFormFields>({ mode: 'onChange' });
+  const {
+    register,
+    getFieldState,
+    handleSubmit,
+    formState: { errors, dirtyFields, isValid, isDirty }
+  } = useForm<IFormFields>({
+    mode: 'onChange',
+    defaultValues: { username: '', email: '', password: '', },
+  });
 
   const onSubmit: SubmitHandler<IFormFields> = data => {
     console.log(data);
@@ -33,22 +41,22 @@ const SignUp: FC<Props> = ({ nextStep }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormFields>
           <Input
-            className={errors.username && 'is-error'}
             type='text'
             placeholder='Username'
             {...register('username', { required: true })}
+            state={getFieldState('username')}
           />
           <Input
-            className={errors.email && 'is-error'}
             type='email'
             placeholder='Email'
-            {...register('email', { required: true })}
+            {...register('email', { required: true, pattern: REGEX.email })}
+            state={getFieldState('email')}
           />
           <Input
-            className={errors.password && 'is-error'}
             type='password'
             placeholder='Password'
             {...register('password', { required: true, minLength: 6 })}
+            state={getFieldState('password')}
           />
         </FormFields>
         <FormButton type='submit' disabled={!isValid}>Send password</FormButton>

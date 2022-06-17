@@ -9,7 +9,15 @@ interface IFormFields {
 };
 
 const Password: FC = () => {
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm<IFormFields>({ mode: 'onChange' });
+  const {
+    register,
+    getFieldState,
+    handleSubmit,
+    formState: { errors, dirtyFields, isValid, isDirty }
+  } = useForm<IFormFields>({
+    mode: 'onChange',
+    defaultValues: { currentPassword: '', newPassword: '', },
+  });
 
   const onSubmit: SubmitHandler<IFormFields> = data => console.log(data);
 
@@ -17,16 +25,16 @@ const Password: FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormFields>
         <Input
-          className={errors.currentPassword && 'is-error'}
           type='password'
           placeholder='Current password'
           {...register('currentPassword', { required: true, minLength: 6 })}
+          state={getFieldState('currentPassword')}
         />
         <Input
-          className={errors.newPassword && 'is-error'}
           type='password'
           placeholder='New password'
           {...register('newPassword', { required: true, minLength: 6 })}
+          state={getFieldState('newPassword')}
         />
       </FormFields>
       <FormButton type='submit' disabled={!isValid}>Save</FormButton>

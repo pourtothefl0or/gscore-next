@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { SubmitHandler, useForm } from "react-hook-form";
 import styled from 'styled-components';
+import { REGEX } from '../../../../../constants';
 import { Button, Input } from '../../../../../ui/components';
 
 interface IFormFields {
@@ -9,7 +10,15 @@ interface IFormFields {
 };
 
 const Info: FC = () => {
-  const { register, handleSubmit, formState: { errors, isValid } } = useForm<IFormFields>({ mode: 'onChange' });
+  const {
+    register,
+    getFieldState,
+    handleSubmit,
+    formState: { errors, dirtyFields, isValid, isDirty }
+  } = useForm<IFormFields>({
+    mode: 'onChange',
+    defaultValues: { username: '', email: '', },
+  });
 
   const onSubmit: SubmitHandler<IFormFields> = data => console.log(data);
 
@@ -17,16 +26,16 @@ const Info: FC = () => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormFields>
         <Input
-          className={errors.username && 'is-error'}
           type='text'
           placeholder='Username'
           {...register('username', { required: true })}
+          state={getFieldState('username')}
         />
         <Input
-          className={errors.email && 'is-error'}
           type='email'
           placeholder='Email'
-          {...register('email', { required: true })}
+          {...register('email', { required: true, pattern: REGEX.email })}
+          state={getFieldState('email')}
         />
       </FormFields>
       <FormButton type='submit' disabled={!isValid}>Save</FormButton>

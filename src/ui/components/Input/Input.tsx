@@ -7,12 +7,14 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string | 'is-success' | 'is-error';
   type: 'text' | 'email' | 'password';
   placeholder: string;
+  state?: any; // FIX TYPE (UseFormGetFieldState)
 };
 
-const Input: FC<Props> = forwardRef<HTMLInputElement, Props>(({ className, type, placeholder, ...props }, ref) => {
-  const isSuccess = (): boolean | undefined => className?.includes('is-success');
-  const isError = (): boolean | undefined => className?.includes('is-error');
+interface IField {
+  $state: any; // FIX TYPE (UseFormGetFieldState)
+};
 
+const Input: FC<Props> = forwardRef<HTMLInputElement, Props>(({ className, type, placeholder, state, ...props }, ref) => {
   return (
     <Root className={className}>
       <FieldWrapper>
@@ -21,11 +23,12 @@ const Input: FC<Props> = forwardRef<HTMLInputElement, Props>(({ className, type,
           placeholder={placeholder}
           ref={ref}
           {...props}
+          $state={state}
         />
-        {isSuccess() && <Success />}
-        {isError() && <Error />}
+        {state.isDirty && !state.invalid && <Success />}
+        {state.invalid && <Error />}
       </FieldWrapper>
-      {isError() && <Alert>Error text</Alert>}
+      {state.invalid && <Alert>Error text</Alert>}
     </Root>
   );
 });
@@ -34,20 +37,6 @@ export default Input;
 
 const Root = styled.label`
   display: block;
-
-  &.is-success {
-    input {
-      border-color: ${COLORS.system.green[300]};
-      padding-right: calc(24px + 23px * 2);
-    }
-  }
-
-  &.is-error {
-    input {
-      border-color: ${COLORS.system.red[300]};
-      padding-right: calc(24px + 23px * 2);
-    }
-  }
 `;
 
 const FieldWrapper = styled.span`
@@ -66,7 +55,7 @@ const FieldWrapper = styled.span`
   }
 `;
 
-const Field = styled.input`
+const Field = styled.input<IField>`
   border: 1px solid ${COLORS.neutral[300]};
   border-radius: ${VARS.radius[2]};
   padding: 25px 23px;
@@ -79,6 +68,16 @@ const Field = styled.input`
   &::placeholder {
     color: ${COLORS.neutral[500]};
   }
+
+  ${({ $state }) => $state.invalid &&`
+    border-color: ${COLORS.system.red[300]};
+    padding-right: calc(24px + 23px * 2);
+  `}
+
+  ${({ $state }) => $state.isDirty && !$state.invalid &&`
+    border-color: ${COLORS.system.green[300]};
+    padding-right: calc(24px + 23px * 2);
+  `}
 `;
 
 const Alert = styled.p`
